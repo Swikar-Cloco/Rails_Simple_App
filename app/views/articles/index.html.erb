@@ -1,3 +1,46 @@
 
 <%# To imbed ruby code in here we need to use embedded ruby tags like this one used to comment %>
+
+
 <p><h2>Index for articles</h2></p>
+<table>
+    <thead>
+        <tr>
+
+            <th>
+                Id
+            </th>    
+            <th>
+                Title
+            </th>    
+            <th>
+                Description
+            </th>    
+            <th>
+                Actions
+            </th>   
+        </tr>
+    </thead>
+    <tbody>
+        <% @articles.each do |article|  %>
+            <tr>
+                <td> 
+                    <%= article.id  %>
+                </td>
+
+                <td> 
+                    <%= article.title  %>
+                </td>
+
+                <td> 
+                    <%= article.description  %>
+                </td>
+
+                <td> 
+                    <button>Edit </button> &nbsp; <button>Delete </button> 
+                </td>
+                            
+            </tr>
+        <%end  %>
+    </tbody>
+</table>
