@@ -11,6 +11,13 @@
   </head>
 
   <body>
+    
+    <%# This portion is used to iterate on each flash notices or any other messages to display just above the body %>
+    <%flash.each do |hash_var, msg| %>
+      <%=msg  %>
+    <%end  %>
+
+
     <%= yield %>
   </body>
 </html>

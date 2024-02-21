@@ -42,5 +42,13 @@
                             
             </tr>
         <%end  %>
+        <tr> 
+            <%# <td colspan=4 align=center> Create a new listing </td> %>
+
+            <%# The below ruby code creates a hyperlink that has display value New article abnd redirects to /articles/new which is stored in new_article_path by rails by default %>
+            <td align=center colspan=4>
+            <%= link_to "New article", new_article_path %>
+            </td>
+        </tr>
     </tbody>
 </table>
