@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   resources :artists
 
-  resources :articles, only: [:show, :index, :new, :create, :edit, :update]
+  # resources :articles, only: [:show, :index, :new, :create, :edit, :update, :destroy]
+  #the above line ans the below lines are same. in above we are specifying which routes to use but as we have used every possible usage we can simply write as line below as it would do the same.
+  resources :articles
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

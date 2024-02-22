@@ -13,3 +13,11 @@ Title: <%= @article.title  %>
 <p> <strong>
 Description: <%= @article.description  %>
 </strong> </p> 
+<%= button_to "DESTROY", @article, method: :delete, onclick: "return confirm('Are you sure you want to delete this article?');"  %>
+<%# <%= button_to "DESTROY2", @article, method: :delete, onclick: "return confirm('Are you sure you want to delete this post?');"  %> 
+
+<p>
+
+<%= link_to 'EDIT',  edit_article_path(@article),  data: { confirm: 'Are you sure you want to edit this post?' }%> 
+<%= button_to 'Articles Listing',  articles_path%> <br>
+</p>

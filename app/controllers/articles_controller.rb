@@ -110,6 +110,12 @@ class ArticlesController < ApplicationController
       # respond_to do |format|
     end
 
+    def destroy
+      @article = Article.find(params[:id])    
+      @article.destroy
+      redirect_to articles_path
+    end
+
   
     private
   # the article_params method whitelists the two parameters title and descripton so that it can be passed to Article model. It's rails security feature from rails 4

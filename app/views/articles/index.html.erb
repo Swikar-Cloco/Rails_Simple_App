@@ -37,7 +37,12 @@
                 </td>
 
                 <td> 
-                    <button>Edit </button> &nbsp; <button>Delete </button> 
+                    <%= link_to 'SHOW',  article_path(article)%> <br>
+                    <%= link_to 'EDIT',  edit_article_path(article)%> <br>
+                    <%# <%= link_to 'Delete',  article_path(article), method: :delete %> 
+                    <%= link_to 'DELETE',  article, method: :delete %><br>
+                    <%= button_to "DESTROY", article, method: :delete, onclick: "return confirm('SURE ???');" %>
+                    <%#  link_to 'Delete',  article_path(article), method: :delete -- simply we could have passed article as rails is smart enough to take id from the each do iteration var article  %>
                 </td>
                             
             </tr>
@@ -47,7 +52,7 @@
 
             <%# The below ruby code creates a hyperlink that has display value New article abnd redirects to /articles/new which is stored in new_article_path by rails by default %>
             <td align=center colspan=4>
-            <%= link_to "New article", new_article_path %>
+            <%= link_to "Create a new article", new_article_path %>
             </td>
         </tr>
     </tbody>
