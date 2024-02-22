@@ -1,54 +1,10 @@
 <h2>Editing article</h2>
 
+<%=render 'form'%>
 
-<% if @article %>
-    <% if @article.errors.any?  %>
-        <h3> list of error/s  <h3>
-        <ul>
-        <% @article.errors.full_messages.each do |msg|  %>
-            <li>
-            <%=msg %> 
-            </li>
-        <% end %>
-        </ul>
-    <% end  %>
-<% end  %>
-
-<%# 
-form_with is form helper to create form the scope defines the model abd url sets the url in the below linguo style if I were to do url: swikarr_path it would
-simply set action=/swikarr in html, And that is just the general logic, 
-but it wont work as we dont have local method or var named swikarr_path by default unless it is created. 
-local: true is used to post this form using standard http Post instead of ajax which is the default setting of the form_with
-
-form_with: This is a Rails helper method used to generate HTML forms. It replaces the older form_for and form_tag methods in Rails 5.1 and later versions.
-
-scope: :article: This option sets the form's scope to the :article object. This means that the form fields will be named with the prefix article[], which is useful for handling nested attributes or multiple forms on the same page.
-
-url: articles_path: This option specifies the URL where the form data should be submitted. articles_path is a Rails helper method that generates the URL for the create action of the ArticlesController. This means that when the form is submitted, it will send a POST request to the create action of the ArticlesController.
-
-local: true: This option specifies that the form should be submitted using AJAX (Asynchronous JavaScript and XML) rather than a traditional HTTP request. This can be useful for improving the user experience by submitting the form without reloading the entire page.
-
-    <%= form_with scope: :article, url: articless_path, local: true do |f| %>   
-    <%# <% end %> 
-
- 
-<%= form_with(model: @article, local: true)  do |f| %>   
-<p>
-<%= f.label :title  %></br>
-<%= f.text_field :title  %>
-</p>
-
-<p>
-<%= f.label :description  %></br>
-<%= f.text_area :description  %>
-</p>
-
-<p>
-<%= f.submit   %></br>
-</p>
 
 <%# The below ruby code creates a hyperlink that has display value New article abnd redirects to /articles/new which is stored in new_article_path by rails by default %>
 <p>
 <%= link_to "Back", articles_path %>
 </p>
-<% end %>
+<%# <% end %>

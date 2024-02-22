@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+    before_action :find_article, only: [:edit, :update, :destroy ]
     def show
         # the parameter passed in the URI transfers here in params in hash data structure (dictonary)
         # created instance variable so that it would be globally accessible
@@ -38,7 +39,7 @@ class ArticlesController < ApplicationController
 
     # Edit generally should be after new and before create, if not put in order it might not work
     def edit
-      @article = Article.find(params[:id])
+      # @article = Article.find(params[:id])
     end
 
     # def create
@@ -84,7 +85,7 @@ class ArticlesController < ApplicationController
       # for new creation we will create an object by .new mthod but for update we will find and update
       # @article = Article.new(article_params)
 
-      @article = Article.find(params[:id])
+      # @article = Article.find(params[:id])
       puts @article
       
       if  @article.update(article_params)
@@ -111,7 +112,7 @@ class ArticlesController < ApplicationController
     end
 
     def destroy
-      @article = Article.find(params[:id])    
+      # @article = Article.find(params[:id])    
       @article.destroy
       redirect_to articles_path
     end
@@ -121,6 +122,12 @@ class ArticlesController < ApplicationController
   # the article_params method whitelists the two parameters title and descripton so that it can be passed to Article model. It's rails security feature from rails 4
     def article_params
       params.require(:article).permit(:title, :description)
+    end
+
+    # This methods is creted for refactoring the code
+    # as the find method for Article is used multiple times, we created a method/action for this and we will setup and use before_action helper to execute this method before other methods where article find is done.
+    def find_article
+      @article = Article.find(params[:id])
     end
 
 

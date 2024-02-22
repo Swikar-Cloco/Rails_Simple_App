@@ -19,5 +19,5 @@ Description: <%= @article.description  %>
 <p>
 
 <%= link_to 'EDIT',  edit_article_path(@article),  data: { confirm: 'Are you sure you want to edit this post?' }%> 
-<%= button_to 'Articles Listing',  articles_path%> <br>
+<%= button_to 'Articles Listing',  articles_path, method: :get %> <br>
 </p>

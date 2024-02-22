@@ -1,10 +1,7 @@
-<p><h2>This is the New page to create a new listing </h2></p>
-<%# not used for now due  to routing method error %>
-<%# <%= render 'form'  %>
 
 <% if @article %>
-<h3> list of error/s  <h3>
     <% if @article.errors.any?  %>
+        <h3> list of error/s  <h3>
         <ul>
         <% @article.errors.full_messages.each do |msg|  %>
             <li>
@@ -33,7 +30,7 @@ local: true: This option specifies that the form should be submitted using AJAX 
     <%# <% end %> 
 
  
-<%= form_with scope: :article, url: articles_path, local: true do |f| %>   
+<%= form_with(model: @article, local: true)  do |f| %>   
 <p>
 <%= f.label :title  %></br>
 <%= f.text_field :title  %>
@@ -47,12 +44,4 @@ local: true: This option specifies that the form should be submitted using AJAX 
 <p>
 <%= f.submit   %></br>
 </p>
-<% end %>
-
-
-
-
-<%# The below ruby code creates a hyperlink that has display value New article abnd redirects to /articles/new which is stored in new_article_path by rails by default %>
-<p>
-<%= link_to "Back", articles_path %>
-</p>
+<%end  %>
