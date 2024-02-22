@@ -36,6 +36,11 @@ class ArticlesController < ApplicationController
       @newArticleCreated = 0
     end
 
+    # Edit generally should be after new and before create, if not put in order it might not work
+    def edit
+      @article = Article.find(params[:id])
+    end
+
     # def create
     #   puts params[:article]
     #   @parameter = params[:article]
@@ -73,11 +78,45 @@ class ArticlesController < ApplicationController
         end
       end
     end
+
+    # update generally should be after the create
+    def update
+      # for new creation we will create an object by .new mthod but for update we will find and update
+      # @article = Article.new(article_params)
+
+      @article = Article.find(params[:id])
+      puts @article
+      
+      if  @article.update(article_params)
+        flash[:notice]="Successfully updated"
+        redirect_to @article
+      else
+        
+        # puts "This is flash notice for now"
+        # puts    flash[:notice] 
+        raw_errors = @article.errors.full_messages
+        errors=[]
+        raw_errors.each do |error|
+          errors<<error
+        end
+        puts "final error"
+        puts errors
+        flash[:notice] = "Could not update. Error/s " + errors.to_s
+        # @article.errors.full_messages
+        # redirect_to edit_article_url(@article)
+        render 'edit'
+      end
+      # if @article.save
+      # respond_to do |format|
+    end
+
   
     private
   # the article_params method whitelists the two parameters title and descripton so that it can be passed to Article model. It's rails security feature from rails 4
     def article_params
       params.require(:article).permit(:title, :description)
     end
+
+
 
 end
