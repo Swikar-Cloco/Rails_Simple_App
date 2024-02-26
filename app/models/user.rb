@@ -1,4 +1,11 @@
 class User < ApplicationRecord
+    # This is general uniqueness check but the below line is for case insensitivity as for username, Swikar should be equal to swikar
+    # validates :username, presence: true, uniqueness: true, length: {minimum:2, maximum:25}
+    validates :username, presence: true, uniqueness: {case_sensitive: false}, length: {minimum:2, maximum:25}
+    
+    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+
+    validates :email, presence: true, length: { maximum:105}, format: {with: VALID_EMAIL_REGEX}
     # This is an associtation it is used to simply create relation between atleast 2 models.  Here User model has many Article models. 
     has_many :articles
 end

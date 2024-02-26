@@ -53,6 +53,8 @@ class ArticlesController < ApplicationController
 
     def create
       @article = Article.new(article_params)
+      # Hard coding the value of user_id while creating article as authentication system has not been implemented
+      @article.user = User.find(2)
 
       # This block allows your controller to respond to different formats such as HTML, JSON, XML, etc. The block takes a format object that represents the format of the request.
       # But this is not necessary
