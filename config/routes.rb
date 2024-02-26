@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users
   resources :artists
 
   # resources :articles, only: [:show, :index, :new, :create, :edit, :update, :destroy]
