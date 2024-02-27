@@ -29,7 +29,9 @@ class ArticlesController < ApplicationController
     end
     
     def index
-        @articles = Article.all
+        # @articles = Article.all
+        # instead of getting all the articles we are using pagination technique and we are getting limited items per page 
+        @articles  = Article.paginate(page: params[:page], per_page: 5)
     end
 
     def new

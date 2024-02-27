@@ -1,5 +1,14 @@
 <p><h2>Index for articles</h2></p>
+<%# This renders the page numbers, prev, and next button  %>
+
+
+
 <%= render 'article' %>
+
+<div class="apple_pagination">
+    <%= will_paginate @article, :container => false %>
+</div>
+<%# <%= will_paginate @article  %> 
 <table>
 <tr> 
             <%# <td colspan=4 align=center> Create a new listing </td> %>
