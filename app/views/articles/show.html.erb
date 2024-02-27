@@ -3,6 +3,13 @@
 <p><h2>This is the show tempelate invoked by show method in ArtistsController class </h2></p>
 
 <p> <strong>
+Author: <ul> <li> Username:  <%= @article.user.username  %> </li>
+<li> Email: <%= @article.user.email  %> </li>
+<li>Id: <%= @article.user.id  %> </li>
+</ul>
+</strong> </p> 
+
+<p> <strong>
 ID: <%= @article.id  %>
 </strong> </p> 
 

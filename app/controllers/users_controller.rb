@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    
     # the parameter passed in the URI transfers here in params in hash data structure (dictonary)
     # created instance variable so that it would be globally accessible
     @id = params[:id]
@@ -30,6 +31,7 @@ class UsersController < ApplicationController
 
     if @yes_exists==true 
         @user = User.find(params[:id])
+        @articles= @user.articles
     else
         html_content = "<h2>No record found for id "  + params[:id] + "</h2>"
 
@@ -52,7 +54,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
+        # format.html { redirect_to user_url(@user), notice: "User was successfully created." }
+        format.html { redirect_to articles_path, notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -92,6 +95,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username)
+      params.require(:user).permit(:username, :email, :password)
     end
 end

@@ -15,8 +15,22 @@
     <%= form.label :username, style: "display: block" %>
     <%= form.text_field :username %>
   </div>
+  
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email %>
+  </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.label :password, style: "display: block" %>
+    <%= form.text_field :password %>
+  </div>
+
+  
+  
+
+
+  <div>
+    <%= form.submit(@user.new_record? ? "Sign Up" : "Update") %>
   </div>
 <% end %>

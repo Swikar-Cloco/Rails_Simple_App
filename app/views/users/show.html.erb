@@ -1,6 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @user %>
+<%= gravatar_for @user  %>
+<h3> Articles Published <h3> 
+<%# <%articles = @user.articles
+  articles.each do |a|
+%>
+  
+     <%# <p> <%=a.title  %> 
+    <%# <%=link_to article_url(a) %> 
+
+<%# <% end %> 
+<%= render 'articles/article'  %>
+
 
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |

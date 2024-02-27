@@ -1,0 +1,52 @@
+
+<%# To imbed ruby code in here we need to use embedded ruby tags like this one used to comment %>
+
+
+
+<table>
+    <thead>
+        <tr>
+
+            <th>
+                Id
+            </th>    
+            <th>
+                Title
+            </th>    
+            <th>
+                Description
+            </th>    
+            <th>
+                Actions
+            </th>   
+        </tr>
+    </thead>
+    <tbody>
+        <% @articles.each do |article|  %>
+            <tr>
+                <td> 
+                    <%= article.id  %>
+                </td>
+
+                <td> 
+                    <%= article.title  %>
+                </td>
+
+                <td> 
+                    <%= article.description  %>
+                </td>
+
+                <td> 
+                    <%= link_to 'SHOW',  article_path(article)%> <br>
+                    <%= link_to 'EDIT',  edit_article_path(article)%> <br>
+                    <%# <%= link_to 'Delete',  article_path(article), method: :delete %> 
+                    <%= link_to 'DELETE',  article, method: :delete %><br>
+                    <%= button_to "DESTROY", article, method: :delete, onclick: "return confirm('SURE ???');" %>
+                    <%#  link_to 'Delete',  article_path(article), method: :delete -- simply we could have passed article as rails is smart enough to take id from the each do iteration var article  %>
+                </td>
+                            
+            </tr>
+        <%end  %>
+        
+    </tbody>
+</table>
