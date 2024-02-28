@@ -25,17 +25,30 @@ class ApplicationController < ActionController::Base
     end
 
     def require_same_user
-        if @article
-            if (current_user.id != @article.user_id)  
+        if (current_user.admin==true)
+            puts current_user.admin.to_s + " - Admin is true" 
+        elsif @article
+            if((current_user.id != @article.user_id))
+                puts current_user.id
+                puts @article.user_id
                 flash[:notice] = "You are not authorized for this action"
-                redirect_to articles_path 
+                redirect_to articles_path
             end
-        end
-        if @user
-            if (current_user.id != @user.id)
+            # if ((current_user.id != @article.user_id) || (current_user.admin!=true))
+            #     flash[:notice] = "You are not authorized for this action"
+            #     redirect_to articles_path 
+            # end
+        elsif @user
+            if((current_user.id != @user.id))
+                puts current_user.id
+                puts @user.id
                 flash[:notice] = "You are not authorized for this action"
-                redirect_to articles_path 
+                redirect_to articles_path
             end
+            # if ((current_user.id != @user.id) || (current_user.admin!=true))
+            #     flash[:notice] = "You are not authorized for this action"
+            #     redirect_to articles_path 
+            # end
         end
     end
 end
