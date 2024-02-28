@@ -38,15 +38,15 @@
 
                 <td> 
                     <%= link_to 'VIEW',  article_path(article)%> <br>
-                    <% if logged_in? && current_user.id == article.user_id  %>
-                    <br>
-                        <%= link_to 'EDIT',  edit_article_path(article)%> <br>
-                        <%# <%= link_to 'Delete',  article_path(article), method: :delete %> 
-                        <%# This is not working so we are using buttons instead of links %>
-                        <%# <%= link_to 'DELETE',  article, method: :delete %><br>
-                        <%= button_to "DELETE", article, method: :delete, onclick: "return confirm('SURE ???');" %> <br>
-                        <%#  link_to 'Delete',  article_path(article), method: :delete -- simply we could have passed article as rails is smart enough to take id from the each do iteration var article  %>
-                    <%end  %>
+                        <% if logged_in? && (admin? || current_user.id == article.user_id) %>
+                            <br>
+                            <%= link_to 'EDIT',  edit_article_path(article)%> <br>
+                            <%# <%= link_to 'Delete',  article_path(article), method: :delete %> 
+                            <%# This is not working so we are using buttons instead of links %>
+                            <%# <%= link_to 'DELETE',  article, method: :delete %><br>
+                            <%= button_to "DELETE", article, method: :delete, onclick: "return confirm('SURE ???');" %> <br>
+                            <%#  link_to 'Delete',  article_path(article), method: :delete -- simply we could have passed article as rails is smart enough to take id from the each do iteration var article  %>
+                        <%end  %>
                 </td>
                             
             </tr>

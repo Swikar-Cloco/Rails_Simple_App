@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     # By the use of helper method we are defining them as helpers not only for controllers but also for views
-    helper_method :current_user, :logged_in?
+    helper_method :current_user, :logged_in?, :admin?
     def testMethod
         render html: 'Helloo CLOCO'
     end
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     end
 
     def require_same_user
-        if (current_user.admin==true)
+        if admin?
             puts current_user.admin.to_s + " - Admin is true" 
         elsif @article
             if((current_user.id != @article.user_id))
@@ -49,6 +49,11 @@ class ApplicationController < ActionController::Base
             #     flash[:notice] = "You are not authorized for this action"
             #     redirect_to articles_path 
             # end
+        end
+    end
+    def admin?
+        if logged_in?
+            return current_user.admin?
         end
     end
 end
