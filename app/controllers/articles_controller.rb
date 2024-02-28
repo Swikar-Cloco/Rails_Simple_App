@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
     before_action :find_article, only: [:edit, :update, :destroy ]
+    before_action :require_user, except: [:index, :show]
+    before_action :require_same_user, only: [:edit, :update, :destroy] 
     def show
         # the parameter passed in the URI transfers here in params in hash data structure (dictonary)
         # created instance variable so that it would be globally accessible
@@ -8,8 +10,8 @@ class ArticlesController < ApplicationController
 
         # yes_exists = @exists.select {|ex_id| ex_id == @id} 
 
-        @ids_in_Article.each do |ex_id|
-          if @id.to_s == ex_id.to_s
+        @ids_in_Article.each do |id_from_table|
+          if @id.to_s == id_from_table.to_s
             @yes_exists = true
             break
           else
@@ -36,11 +38,27 @@ class ArticlesController < ApplicationController
 
     def new
       # When new is loaded for any old records/previously created records, below variable is false and when it is loaded after creating a new article 
+      # this is not needed. Initially I was trying to make the form common for new creation and edition of old. 
+      # But rails is smart enough to detect if new form needs to be generated of a form should be pre-filled if it is for edit depending upon the redirection we use
+      # But I am leaving this as it is as I am learning and I want to remember this if I come back after a couple of month or maybe years
       @newArticleCreated = 0
+
+      # if !logged_in?
+      #   redirect_to login_path,  notice: "Please log in to create your own article."
+
+      # end
+
     end
 
     # Edit generally should be after new and before create, if not put in order it might not work
     def edit
+      # if current_user.id == @article.user_id
+      #   puts "Can edit"
+      # else
+      #   puts "Can't edit"
+      #   flash[:notice] = "You dont have permission for this action"
+      #   redirect_to articles_path 
+      # end
       # @article = Article.find(params[:id])
     end
 
@@ -56,7 +74,9 @@ class ArticlesController < ApplicationController
     def create
       @article = Article.new(article_params)
       # Hard coding the value of user_id while creating article as authentication system has not been implemented
-      @article.user = User.find(2)
+      # @article.user = User.find(2)
+      @article.user = current_user
+
 
       # This block allows your controller to respond to different formats such as HTML, JSON, XML, etc. The block takes a format object that represents the format of the request.
       # But this is not necessary
@@ -118,6 +138,7 @@ class ArticlesController < ApplicationController
     def destroy
       # @article = Article.find(params[:id])    
       @article.destroy
+      flash[:notice] = "The user alongwith all related articles destroyed"
       redirect_to articles_path
     end
 

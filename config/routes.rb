@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   root 'pages#home'
   get 'about', to: 'pages#about'
   get 'signup', to: 'users#new'
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
 
   #don't implement like this as this does not follow the convention for naming but it works
   get 'swikar', to: 'pages#testforswikar'

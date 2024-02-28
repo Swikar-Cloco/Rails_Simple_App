@@ -10,5 +10,7 @@
     </p>
   <% end %>
 </div>
-
+<div class="apple_pagination">
+    <%= will_paginate @user, :container => false %>
+</div>
 <%= link_to "New user", new_user_path %>

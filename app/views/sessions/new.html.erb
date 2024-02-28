@@ -1,0 +1,31 @@
+<p><h2> Login Page </h2></p>
+
+
+ 
+<%= form_with scope: :session, url: login_path, local: true do |f| %>   
+<p>
+<%= f.label :email  %></br>
+<%= f.email_field :email  %>
+</p>
+
+<p>
+<%= f.label :password  %></br>
+<%= f.password_field :password  %>
+</p>
+
+<p>
+<%= f.submit  "Log in" %></br>
+</p>
+<% end %>
+
+<p>
+    Not an author yet ??
+</p>
+<%= button_to "SignUp",  signup_path, method: :get  %>
+<%# <%= link_to "a",  signup_path  %>
+<%#  %>
+
+<%# The below ruby code creates a hyperlink that has display value New article abnd redirects to /articles/new which is stored in new_article_path by rails by default %>
+<p>
+<%= link_to "Back", articles_path %>
+</p>

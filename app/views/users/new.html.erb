@@ -4,6 +4,12 @@
 
 <br>
 
-<div>
-  <%= link_to "Back to users", users_path %>
-</div>
+<% if logged_in?  %>
+  <div>
+    <%= link_to "Back to users", users_path %>
+  </div>
+<%else  %>
+  <div>
+    <%= link_to "Articles", articles_path %>
+  </div>
+<%end  %>

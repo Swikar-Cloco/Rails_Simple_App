@@ -9,13 +9,23 @@
     <%= will_paginate @article, :container => false %>
 </div>
 <%# <%= will_paginate @article  %> 
-<table>
+<table align="center">
 <tr> 
-            <%# <td colspan=4 align=center> Create a new listing </td> %>
+    <%# <td colspan=4 align=center> Create a new listing </td> %>
 
-            <%# The below ruby code creates a hyperlink that has display value New article abnd redirects to /articles/new which is stored in new_article_path by rails by default %>
-            <td align=center colspan=4>
-            <%= link_to "Create a new article", new_article_path %>
-            </td>
-        </tr>
+    <%# The below ruby code creates a hyperlink that has display value New article abnd redirects to /articles/new which is stored in new_article_path by rails by default %>
+    <td align=center colspan=4>
+    <%= link_to "Create a new article", new_article_path %>
+    </td>
+</tr>
+<tr> 
+    <td align="center"> 
+    <% if logged_in? %>
+        <%= button_to "Log Out", logout_path, method: :delete, onclick: "return confirm('Are you sure ?');"  %>
+    <% else %>
+        <%= button_to "Login", login_path, method: :get %>
+    <%end %>
+    </td> 
+</tr> 
+
 </table>

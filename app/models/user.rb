@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
     validates :email, presence: true, length: { maximum:105}, format: {with: VALID_EMAIL_REGEX}
     # This is an associtation it is used to simply create relation between atleast 2 models.  Here User model has many Article models. 
-    has_many :articles
+    # This dependent: : destroy ties destroy of user with all the deletion of related articles too 
+    has_many :articles, dependent: :destroy
 
 end

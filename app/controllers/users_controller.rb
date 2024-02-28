@@ -3,15 +3,26 @@ class UsersController < ApplicationController
   # set user was done by the scaffold generator but it was not handeling whenever there was no users so I handeled it manually so set_user is not done using before_action for show method/action
   # instead i did what set_user would do but inside the show action and hadeled whenever no record was found issue was being generated
   before_action :set_user, only: %i[ edit update destroy ]
+  before_action :require_user
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    # puts "Hererrrrrrrrrrrrrrrrrrr"
+    # if current_user.email == "swikar@cloco.com"
+    #   puts "Can Access"
+    # else
+    #   puts "Can't Access"
+    #   flash[:notice] = "You dont have permission for this action - not an admin"
+    #   redirect_to articles_path 
+    # end
+    
+    # @users = User.all
+    @users = User.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /users/1 or /users/1.json
   def show
-    
     # the parameter passed in the URI transfers here in params in hash data structure (dictonary)
     # created instance variable so that it would be globally accessible
     @id = params[:id]
@@ -46,6 +57,13 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    # if logged_in? && current_user.id == @user.id
+    #   puts "Can edit"
+    # else
+    #   puts "Can't edit"
+    #   flash[:notice] = "You dont have permission for this action"
+    #   redirect_to articles_path 
+    # end
   end
 
   # POST /users or /users.json
@@ -80,9 +98,10 @@ class UsersController < ApplicationController
   # DELETE /users/1 or /users/1.json
   def destroy
     @user.destroy!
+    session[:user_id] = nil
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
+      format.html { redirect_to users_url, notice: "User was successfully deleted and all the related articles were too." }
       format.json { head :no_content }
     end
   end

@@ -1,2 +1,41 @@
-<B>Home Page</B> <BR>
+<center><h2>Home Page</h2>
 <%=link_to 'Articles Listing', articles_path  %>
+
+<table align="center">
+    <p>
+        From helper method
+    </p>
+<% if logged_in? %>
+    <%= button_to "Log Out", logout_path, method: :delete, onclick: "return confirm('Are you sure ?');"  %>
+<% else %>
+    <%= button_to "Login", login_path, method: :get %>
+<%end %>
+
+    <p>
+        From custom session check right here
+    </p>
+
+<% if session[:user_id] %>
+    <% puts "SESSionnnnnnnnnnnnnn Existssssssssssssssssss\nsdasdasdasdasda\nsdasdsdssd\nhehehehehehehehehehehehehehehehe"
+    puts session[:user_id] %>
+    <tr> 
+        <td align=center colspan=4>
+            <%# the link to is not working in my project but the button is working so implementing button instead of link %>
+        <%# <%= link_to "Log Out", logout_path, method: :delete %> 
+        <%= button_to "Log Out", logout_path, method: :delete, onclick: "return confirm('Are you sure ?');"  %>
+        </td>
+    </tr>
+    <%else  %>
+    <tr> 
+        <td align=center colspan=4>
+            <%# the link to is not working in my project but the button is working so implementing button instead of link %>
+        <%# <%= link_to "Log Out", logout_path, method: :delete %> 
+        <%= button_to "Login", login_path, method: :get %>
+        </td>
+    </tr>
+<%end  %>
+
+
+
+</table>
+</center>
