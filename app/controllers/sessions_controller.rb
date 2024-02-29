@@ -32,12 +32,12 @@ class SessionsController < ApplicationController
         puts "Destroyed sssssssssssssssssssssssssssssssssssssssssssssssssss"
         puts @user
         puts current_user
-        if (@user == current_user)
-            session[:user_id] = nil
-            puts session[:user_id]
-            puts "AsdasdASdASdASdAsdASdASd"
-            flash[:notice] = "Logged out"
-            redirect_to root_path
-        end
+        # if (@user == current_user)
+        session[:user_id] = nil
+        puts session[:user_id]
+        puts "AsdasdASdASdASdAsdASdASd"
+        flash[:notice] = "Logged out"
+        redirect_to root_path
+        # end
     end
 end

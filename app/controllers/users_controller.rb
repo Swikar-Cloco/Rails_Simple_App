@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   # set user was done by the scaffold generator but it was not handeling whenever there was no users so I handeled it manually so set_user is not done using before_action for show method/action
   # instead i did what set_user would do but inside the show action and hadeled whenever no record was found issue was being generated
   before_action :set_user, only: %i[ edit update destroy ]
-  before_action :require_user
+  before_action :require_user, except: [:new, :create]
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
   # GET /users or /users.json
@@ -105,7 +105,7 @@ class UsersController < ApplicationController
       session[:user_id] = nil
     end
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully deleted and all the related articles were too." }
+      format.html { redirect_to articles_url, notice: "User was successfully deleted and all the related articles were too." }
       format.json { head :no_content }
     end
   end
