@@ -29,11 +29,15 @@ class SessionsController < ApplicationController
     def destroy
         # to logout we just simply need to kill the session, or empty the session
         puts "AsdasdASdASdASdAsdASdASd"
-        session[:user_id] = nil
-        puts session[:user_id]
-        puts "AsdasdASdASdASdAsdASdASd"
-        flash[:notice] = "Logged out"
-        redirect_to root_path
-
+        puts "Destroyed sssssssssssssssssssssssssssssssssssssssssssssssssss"
+        puts @user
+        puts current_user
+        if (@user == current_user)
+            session[:user_id] = nil
+            puts session[:user_id]
+            puts "AsdasdASdASdASdAsdASdASd"
+            flash[:notice] = "Logged out"
+            redirect_to root_path
+        end
     end
 end

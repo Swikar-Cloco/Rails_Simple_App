@@ -98,8 +98,12 @@ class UsersController < ApplicationController
   # DELETE /users/1 or /users/1.json
   def destroy
     @user.destroy!
-    session[:user_id] = nil
-
+    puts "Destroyed sssssssssssssssssssssssssssssssssssssssssssssssssss"
+    puts @user
+    puts current_user
+    if (@user == current_user)
+      session[:user_id] = nil
+    end
     respond_to do |format|
       format.html { redirect_to users_url, notice: "User was successfully deleted and all the related articles were too." }
       format.json { head :no_content }
